@@ -1,4 +1,4 @@
-<style type="text/css">
+{# <style type="text/css">
     .form-error {
         color: red;
         font-weight: bold;
@@ -9,7 +9,7 @@
     }
 </style>
 
-{# Etape 2 #}
+
 <div class="card step_2">
     <div class="card-content">
         <span class="card-title color_product_primary center-align">Étape 2</span>
@@ -119,7 +119,7 @@
         </li>
     </ul>
 </div>
-{# Etape 3 #}
+
 <div class="card step_3">
     <div class="card-content">
         <span class="card-title color_product_primary center-align">Étape 3</span>
@@ -150,4 +150,9 @@
             </li>
         </ul>
     </div>
-</div>
+</div> #}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
