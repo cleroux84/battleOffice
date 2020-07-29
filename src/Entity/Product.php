@@ -110,6 +110,11 @@ class Product
         return $this->quantite;
     }
 
+    public function setId(): ?int
+    {
+        return $this->id;
+    }
+
     public function setQuantite(?int $quantite): self
     {
         $this->quantite = $quantite;

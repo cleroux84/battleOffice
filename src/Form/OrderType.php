@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
+use App\Entity\Orders;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class ProductType extends AbstractType
+class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', HiddenType::class)
-       /*      ->add('image')
-            ->add('name')
-            ->add('price')
-            ->add('content')
-            ->add('quantite')  */
+           ->add('montant')
+            ->add('statut') 
+            ->add('product')
+            ->add('client')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => Orders::class,
         ]);
     }
 }

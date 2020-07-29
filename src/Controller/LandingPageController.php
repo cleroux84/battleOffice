@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
+use App\Entity\Orders;
 use App\Entity\Product;
 use App\Entity\ShippingClients;
 use App\Form\ClientType;
+use App\Form\OrderType;
 use App\Form\ShippingType;
 use App\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,14 +41,28 @@ class LandingPageController extends AbstractController
             ->add('product', ProductType::class)
             ->getForm();
             $form->handleRequest($request);
-       
+
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
              /* dd($request->request); */ 
             $entityManager->persist($entity['client']);
             $entityManager->flush();
+
+            $entity["livraison"]->setClient($entity['client']);
             $entityManager->persist($entity['livraison']);
             $entityManager->flush();
+            
+            $order = new Orders();
+            /* $formOrder = $this->createForm(OrderType::class, $order); */
+            $order->setClient($entity['client']);
+
+            $productId = $request->get('order')["cart"]["cart_products"][0];
+            $product = $entityManager->find(Product::class, $productId);
+            $order->setProduct($product);
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($order);
+            $entityManager->flush(); 
 
             return $this->redirectToRoute('landing_page');
         } 

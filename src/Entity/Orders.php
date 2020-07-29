@@ -18,16 +18,6 @@ class Orders
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $montant;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $statut;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Product::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -35,7 +25,7 @@ class Orders
 
     /**
      * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="orders")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
 
@@ -43,30 +33,7 @@ class Orders
     {
         return $this->id;
     }
-
-    public function getMontant(): ?int
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(int $montant): self
-    {
-        $this->montant = $montant;
-
-        return $this;
-    }
-
-    public function getStatut(): ?string
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?string $statut): self
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
+  
 
     public function getProduct(): ?Product
     {
