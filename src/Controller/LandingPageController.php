@@ -47,8 +47,6 @@ class LandingPageController extends AbstractController
             $entityManager->flush();
             $entityManager->persist($entity['livraison']);
             $entityManager->flush();
-            $entityManager->persist($entity['product']);
-            $entityManager->flush();
 
             return $this->redirectToRoute('landing_page');
         } 

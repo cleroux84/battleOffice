@@ -6,6 +6,8 @@ use App\Entity\Clients;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class ClientType extends AbstractType
 {
@@ -22,9 +24,8 @@ class ClientType extends AbstractType
                 'choices' => [
                     'France' => 'France',
                     'Belgique' => 'Belgique',
-                    'Luxembourg' => 'Luxembourg',
-                ],
-            ])
+                    'Luxembourg' => 'Luxembourg',]
+                ])
             ->add('pays')
             ->add('telephone')
             ->add('email')

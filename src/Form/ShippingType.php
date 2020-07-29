@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ShippingType extends AbstractType
 {
@@ -19,7 +20,12 @@ class ShippingType extends AbstractType
             ->add('adresse_complement_shipping')
             ->add('ville_shipping')
             ->add('code_postal_shipping')
-            ->add('pays_shipping')
+            ->add('pays_shipping', ChoiceType::class,[
+                'choices' => [
+                    'France' => 'France',
+                    'Belgique' => 'Belgique',
+                    'Luxembourg' => 'Luxembourg',]
+                ])
             ->add('telephone_shipping')
             ->add('client', HiddenType::class)
         ;

@@ -6,17 +6,20 @@ use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 
 class ProductType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image')
+            ->add('id', HiddenType::class)
+       /*      ->add('image')
             ->add('name')
             ->add('price')
             ->add('content')
-            ->add('quantite')
+            ->add('quantite') */
         ;
     }
 
