@@ -18,6 +18,13 @@ class ClientType extends AbstractType
             ->add('adresse_complement')
             ->add('ville')
             ->add('code_postal')
+            ->add('pays', ChoiceType::class,[
+                'choices' => [
+                    'France' => 'France',
+                    'Belgique' => 'Belgique',
+                    'Luxembourg' => 'Luxembourg',
+                ],
+            ])
             ->add('pays')
             ->add('telephone')
             ->add('email')

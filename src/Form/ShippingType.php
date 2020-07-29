@@ -6,6 +6,7 @@ use App\Entity\ShippingClients;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ShippingType extends AbstractType
 {
@@ -20,7 +21,7 @@ class ShippingType extends AbstractType
             ->add('code_postal_shipping')
             ->add('pays_shipping')
             ->add('telephone_shipping')
-            ->add('client')
+            ->add('client', HiddenType::class)
         ;
     }
 

@@ -40,7 +40,7 @@
 
                         {% for produit in produits %}
                         <label class="cure-radio">
-                            <input name="order[cart][cart_products][0]" value="2" type="radio">
+                            <input name="order[cart][cart_products][0]" value="{{ produit.id }}" type="radio">
                             <article>
                                 <div class="card center-align">
                                     <div class="row">

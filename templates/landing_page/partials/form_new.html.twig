@@ -1,4 +1,4 @@
-{# <style type="text/css">
+<style type="text/css">
     .form-error {
         color: red;
         font-weight: bold;
@@ -9,116 +9,152 @@
     }
 </style>
 
-
+{{ form_start(form) }}
 <div class="card step_2">
     <div class="card-content">
         <span class="card-title color_product_primary center-align">Étape 2</span>
         <p class="h6 center-align">Remplissez ce formulaire</p>
         <div class="form-wrapper">
             <div class="input-field">
-                <input type="text">
-                <label>Prénom</label>
-                <div class="form-error"></div>
+                {{ form_label(form.client.prenom, 'Prenom') }}
+                {{ form_widget(form.client.prenom) }}
+                <div class="form-error">
+                    {{ form_errors(form.client.prenom) }}
+                </div>  
             </div>
             <div class="input-field">
-                <input type="text">
-                <label>Nom</label>
-                <div class="form-error"></div>
+                {{ form_label(form.client.nom, 'Nom') }}
+                {{ form_widget(form.client.nom) }}
+                <div class="form-error">
+                    {{ form_errors(form.client.nom) }}
+                </div>
             </div>
             <div class="input-field">
-                <input type="text">
-                <label>Adresse</label>
-                <div class="form-error"></div>
+                 {{ form_label(form.client.adresse, 'Adresse') }}
+                    {{ form_widget(form.client.adresse) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.adresse) }}
+                </div>
+            </div>
+             <div class="input-field">
+               {{ form_label(form.client.adresse_complement, 'Complément d\'adresse') }}
+                    {{ form_widget(form.client.adresse_complement) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.adresse_complement) }}
+                </div>
             </div>
             <div class="input-field">
-                <input type="text">
-                <label>Complément adr.</label>
-                <div class="form-error"></div>
+               {{ form_label(form.client.ville, 'Ville') }}
+                    {{ form_widget(form.client.ville) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.ville) }}
+                </div>
             </div>
             <div class="input-field">
-                <input type="text">
-                <label>Ville</label>
-                <div class="form-error"></div>
+               {{ form_label(form.client.code_postal, 'Code postal') }}
+                    {{ form_widget(form.client.code_postal) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.code_postal) }}
+                </div>
             </div>
             <div class="input-field">
-                <input type="text">
-                <label>Code postal</label>
-                <div class="form-error"></div>
+                {{ form_label(form.client.pays, 'pays') }}
+                    {{ form_widget(form.client.pays) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.pays) }}
+                </div>
+            </div>
+             <div class="input-field">
+                 {{ form_label(form.client.telephone, 'Télephone') }}
+                    {{ form_widget(form.client.telephone) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.telephone) }}
+                </div>
+            </div>
+            <div>
+             {{ form_label(form.client.email, 'E-mail') }}
+                    {{ form_widget(form.client.email) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.email) }}
+                </div>
             </div>
             <div class="input-field">
-                <select>
-                    <option>France</option>
-                </select>
-                <label>Pays</label>
-                <div class="form-error"></div>
+                {{ form_label(form.client.email_confirm, 'Confirm your e-mail') }}
+                    {{ form_widget(form.client.email_confirm) }}
+                    <div class="form-error">
+                    {{ form_errors(form.client.email_confirm) }}
+                </div>
             </div>
-            <div class="input-field">
-                <input type="text">
-                <label>Téléphone</label>
-                <div class="form-error"></div>
-            </div>
-            <div class="input-field">
-                <input type="text">
-                <label>Email</label>
-                <div class="form-error"></div>
-            </div>
-            <div class="input-field">
-                <input type="text">
-                <label>Confirmation email</label>
-                <div class="form-error"></div>
-            </div>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">markunread_mailbox</i>Adresse de livraison différente ?</div>
+                    <div class="collapsible-body">
+
+                        
+                        <div class="input-field">
+                            {{ form_label(form.livraison.prenom_shipping, 'Prenom') }}
+                            {{ form_widget(form.livraison.prenom_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.prenom_shipping) }}
+                            </div>  
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.nom_shipping, 'Nom') }}
+                            {{ form_widget(form.livraison.nom_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.nom_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.adresse_shipping, 'Adresse') }}
+                            {{ form_widget(form.livraison.adresse_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.adresse_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.adresse_complement_shipping, 'Complément d\'adresse') }}
+                            {{ form_widget(form.livraison.adresse_complement_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.adresse_complement_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.ville_shipping, 'Ville') }}
+                            {{ form_widget(form.livraison.ville_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.ville_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.code_postal_shipping, 'Code postal') }}
+                            {{ form_widget(form.livraison.code_postal_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.code_postal_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.pays_shipping, 'Pays') }}
+                            {{ form_widget(form.livraison.pays_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.pays_shipping) }}
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            {{ form_label(form.livraison.telephone_shipping, 'Pays') }}
+                            {{ form_widget(form.livraison.telephone_shipping) }}
+                            <div class="form-error">
+                            {{ form_errors(form.livraison.telephone_shipping) }}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
-    <ul class="collapsible">
-        <li>
-            <div class="collapsible-header"><i class="material-icons">markunread_mailbox</i>Adresse de livraison différente ?</div>
-            <div class="collapsible-body">
-                <div class="input-field">
-                    <input type="text">
-                    <label>Prénom</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Nom</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Adresse</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Complément adr.</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Ville</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Code postal</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <select>
-                        <option>France</option>
-                    </select>
-                    <label>Pays</label>
-                    <div class="form-error"></div>
-                </div>
-                <div class="input-field">
-                    <input type="text">
-                    <label>Téléphone</label>
-                    <div class="form-error"></div>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
 
 <div class="card step_3">
     <div class="card-content">
@@ -152,7 +188,4 @@
     </div>
 </div> #}
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+
