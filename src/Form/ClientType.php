@@ -30,6 +30,7 @@ class ClientType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('email_confirm')
+            
         ;
     }
 

@@ -15,9 +15,75 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\HttpClient;
+
+
 
 class LandingPageController extends AbstractController
 {
+    public function apiOrder(Orders $order)
+    {
+  
+        $orderArray = 
+        [
+        'order'=>
+        [
+            'id' => $order->getId(),
+            'product' => $order->getProduct()->getName(),
+            'payment_method'=> "stripe",
+            'status' => 'WAITING',
+            'client' => 
+            [
+                'firstname' => $order->getClient()->getPrenom(),
+                'lastname' => $order->getClient()->getNom(),
+                'email'=> $order->getClient()->getEmail()
+            ],
+            'addresses'=> 
+            [
+                'billing' => 
+                [
+                    'address_line1' => $order->getClient()->getAdresse(),
+                    "address_line2"=> $order->getClient()->getAdresseComplement(),
+                    "city"=> $order->getClient()->getVille(),
+                    "zipcode"=> $order->getClient()->getCodePostal(),
+                    "country"=> $order->getClient()->getPays(),
+                    "phone"=> $order->getClient()->getTelephone()
+                ],
+                'shipping'=>
+                [
+                    "address_line1"=> '1, rue du test',
+                    "address_line2"=> "3ème étage",
+                    "city"=> "Lyon",
+                    "zipcode"=> "69000",
+                    "country"=> "France",
+                    "phone"=> "string"
+                ]
+            ] 
+        ]   
+        ];
+ 
+
+        $client = HttpClient::create();
+        $response = $client->request('POST', 'https://api-commerce.simplon-roanne.com/order', [
+            'headers' => [
+                'Accept' => 'application/json', //format de ce qu'on envoit
+                'Content-Type'=> 'application/json', //format retour de la reponse
+                'Authorization' => 'Bearer mJxTXVXMfRzLg6ZdhUhM4F6Eutcm1ZiPk4fNmvBMxyNR4ciRsc8v0hOmlzA0vTaX'
+            ],
+            'body' => json_encode($orderArray)
+        ]);
+        $statusCode = $response->getStatusCode();
+        // $statusCode = 200
+        $contentType = $response->getHeaders()['content-type'][0];
+        // $contentType = 'application/json'
+        $content = $response->getContent();
+        // $content = '{"id":521583, "name":"symfony-docs", ...}'
+        $content = $response->toArray();
+        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+        dd($content);
+
+    } 
+
     /**
      * @Route("/", name="landing_page")
      * @throws \Exception
@@ -45,6 +111,7 @@ class LandingPageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
              /* dd($request->request); */ 
+            
             $entityManager->persist($entity['client']);
             $entityManager->flush();
 
@@ -53,7 +120,6 @@ class LandingPageController extends AbstractController
             $entityManager->flush();
             
             $order = new Orders();
-            /* $formOrder = $this->createForm(OrderType::class, $order); */
             $order->setClient($entity['client']);
 
             $productId = $request->get('order')["cart"]["cart_products"][0];
@@ -63,6 +129,11 @@ class LandingPageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($order);
             $entityManager->flush(); 
+
+            //function apiOrder
+
+      $this->apiOrder($order);
+            
 
             return $this->redirectToRoute('landing_page');
         } 
@@ -86,4 +157,7 @@ class LandingPageController extends AbstractController
 
         ]);
     }
+
+  
+
 }
