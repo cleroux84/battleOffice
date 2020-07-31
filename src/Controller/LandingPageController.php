@@ -80,8 +80,9 @@ class LandingPageController extends AbstractController
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        /* dd($content); */
-
+       /*  $apiId = $content['order_id']; 
+            dd($apiId); */
+            return $content;
     } 
 
     /**
@@ -131,19 +132,24 @@ class LandingPageController extends AbstractController
             $entityManager->flush(); 
 
             //Envoi vers l'api :
-            $this->apiOrder($order);
+            $retourApi = $this->apiOrder($order);
+            $orderApi = $retourApi['order_id'];
+            $order->setApiId($orderApi);
+            $entityManager->persist($order);
+            $entityManager->flush(); 
+
+            return $this->redirectToRoute('payment', ['id'=> $order->getId()]);
             
-            return $this->redirectToRoute('payment');
+            /* return $this->redirectToRoute('payment', ['id'=> $order->getId()]); */
         } 
   
         return $this->render('landing_page/index_new.html.twig', [
             'produits' => $produits,
             'form' => $form->createView(),
             'entity' => [
-                'client' => new Clients(),
-                'shipping' => new ShippingClients(), 
-                'product' => new Product()],
-                
+            'client' => new Clients(),
+            'shipping' => new ShippingClients(), 
+            'product' => new Product()],     
         ]);
     }
     /**
@@ -156,6 +162,18 @@ class LandingPageController extends AbstractController
         ]);
     }
 
-  
+      /**
+     * @Route("/payment/{id}", name="payment")
+     */
+    public function payment(Orders $order): Response
+    
+    {
 
+        
+        return $this->render('payment/index.html.twig', [
+            
+        ]);
+    }
+
+  
 }

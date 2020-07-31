@@ -19,7 +19,7 @@ class Orders
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $product;
 
@@ -28,6 +28,11 @@ class Orders
      * @ORM\JoinColumn(nullable=true)
      */
     private $client;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $api_id;
 
     public function getId(): ?int
     {
@@ -58,4 +63,17 @@ class Orders
 
         return $this;
     }
+
+    public function getApiId(): ?int
+    {
+        return $this->api_id;
+    }
+
+    public function setApiId(?int $api_id): self
+    {
+        $this->api_id = $api_id;
+
+        return $this;
+    }
+
 }
