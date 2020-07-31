@@ -80,7 +80,7 @@ class LandingPageController extends AbstractController
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
         $content = $response->toArray();
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        dd($content);
+        /* dd($content); */
 
     } 
 
@@ -130,12 +130,10 @@ class LandingPageController extends AbstractController
             $entityManager->persist($order);
             $entityManager->flush(); 
 
-            //function apiOrder
-
-      $this->apiOrder($order);
+            //Envoi vers l'api :
+            $this->apiOrder($order);
             
-
-            return $this->redirectToRoute('landing_page');
+            return $this->redirectToRoute('payment');
         } 
   
         return $this->render('landing_page/index_new.html.twig', [
